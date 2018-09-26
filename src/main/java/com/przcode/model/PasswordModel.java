@@ -1,47 +1,63 @@
 package com.przcode.model;
 
+import javafx.beans.DefaultProperty;
+
 public class PasswordModel {
 
     private String password;
     private Long passwordLength;
-    private boolean isLowerCaseChar;
-    private boolean isMixLowerAndUpperCase;
-    private boolean isSpecialCharacter;
-    private boolean isDigit;
+    private Boolean isLowerCase;
+    private Boolean isUpperCase;
+    private Boolean isMixLowerAndUpperCase;
+    private Boolean isSpecialCharacter;
+    private Boolean isDigit;
 
-    public PasswordModel(Long passwordLength, boolean isLowerCaseChar, boolean isMixLowerAndUpperCase, boolean isSpecialCharacter, boolean isDigit) {
+    public PasswordModel(Long passwordLength, Boolean isLowerCase, Boolean isUpperCase, Boolean isMixLowerAndUpperCase, Boolean isSpecialCharacter, Boolean isDigit) {
         this.passwordLength = passwordLength;
-        this.isLowerCaseChar = isLowerCaseChar;
+        this.isLowerCase = isLowerCase;
+        this.isUpperCase = isUpperCase;
         this.isMixLowerAndUpperCase = isMixLowerAndUpperCase;
         this.isSpecialCharacter = isSpecialCharacter;
         this.isDigit = isDigit;
     }
 
+    @ChooseMethodAnnotations(methodName = "no choose")
     public String getPassword() {
         return password;
     }
 
+    @ChooseMethodAnnotations(methodName = "no choose")
     public void setPassword(String password) {
         this.password = password;
     }
 
+    @ChooseMethodAnnotations(methodName = "no choose")
     public Long getPasswordLength() {
         return passwordLength;
     }
 
-    public boolean isLowerCaseChar() {
-        return isLowerCaseChar;
+    @ChooseMethodAnnotations(methodName = "choose")
+    public Boolean isLowerCase() {
+        return isLowerCase;
     }
 
-    public boolean isMixLowerAndUpperCase() {
+    @ChooseMethodAnnotations(methodName = "choose")
+    public Boolean isUpperCase() {
+        return isUpperCase;
+    }
+
+    @ChooseMethodAnnotations(methodName = "choose")
+    public Boolean isMixLowerAndUpperCase() {
         return isMixLowerAndUpperCase;
     }
 
-    public boolean isSpecialCharacter() {
+    @ChooseMethodAnnotations(methodName = "choose")
+    public Boolean isSpecialCharacter() {
         return isSpecialCharacter;
     }
 
-    public boolean isDigit() {
+    @ChooseMethodAnnotations(methodName = "choose")
+    public Boolean isDigit() {
         return isDigit;
     }
 }
