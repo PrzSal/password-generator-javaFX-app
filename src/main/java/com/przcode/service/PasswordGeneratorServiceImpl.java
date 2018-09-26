@@ -20,5 +20,22 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
         this.createAllCharInPass(passwordModel);
         return passwordModel;
     }
-
+    
+    private void createAllCharInPass(PasswordModel passwordModel) {
+        Method[] methods = passwordModel.getClass().getDeclaredMethods();
+        String methodNameAndUserAnswer;
+        for (Method method : methods) {
+            if (method.getAnnotation(ChooseMethodAnnotations.class).methodName().equals("choose")) {
+                try {
+                    methodNameAndUserAnswer = method.getName() + method.invoke(passwordModel).toString();
+                    System.out.println(methodNameAndUserAnswer);
+                    this.choosingCharFromRequirement(methodNameAndUserAnswer);
+                } catch (IllegalAccessException e) {
+                    System.out.println(e);
+                } catch (InvocationTargetException f) {
+                    System.out.println(f);
+                }
+            }
+        }
+    }
 }
