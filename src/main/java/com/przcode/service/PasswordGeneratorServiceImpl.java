@@ -20,7 +20,7 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
         this.createAllCharInPass(passwordModel);
         return passwordModel;
     }
-    
+
     private void createAllCharInPass(PasswordModel passwordModel) {
         Method[] methods = passwordModel.getClass().getDeclaredMethods();
         String methodNameAndUserAnswer;
@@ -36,6 +36,12 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
                     System.out.println(f);
                 }
             }
+        }
+    }
+
+    private void choosingCharFromRequirement(String typeRequirement) {
+        if (typeRequirement.contains("true")) {
+            choosingChars.add(PasswordCreator.valueOf(typeRequirement).addChars());
         }
     }
 }
