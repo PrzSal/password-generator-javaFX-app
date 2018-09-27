@@ -5,6 +5,7 @@ import com.przcode.model.PasswordModel;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
 
@@ -16,8 +17,10 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
 
     @Override
     public PasswordModel addPassword(PasswordModel passwordModel) {
-
         this.createAllCharInPass(passwordModel);
+        String generatePassword = this.generatePassword(passwordModel);
+        System.out.println(generatePassword);
+        passwordModel.setPassword(generatePassword);
         return passwordModel;
     }
 
@@ -28,7 +31,6 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
             if (method.getAnnotation(ChooseMethodAnnotations.class).methodName().equals("choose")) {
                 try {
                     methodNameAndUserAnswer = method.getName() + method.invoke(passwordModel).toString();
-                    System.out.println(methodNameAndUserAnswer);
                     this.choosingCharFromRequirement(methodNameAndUserAnswer);
                 } catch (IllegalAccessException e) {
                     System.out.println(e);
@@ -41,7 +43,26 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
 
     private void choosingCharFromRequirement(String typeRequirement) {
         if (typeRequirement.contains("true")) {
-            choosingChars.add(PasswordCreator.valueOf(typeRequirement).addChars());
+            choosingChars.add(PasswordCharCreator.valueOf(typeRequirement).addChars());
         }
+    }
+
+    private String generatePassword(PasswordModel passwordModel) {
+        Character guessChar;
+        String generatePassword = new String();
+        String partPassChar;
+        Random random = new Random();
+
+        while (passwordModel.getPasswordLength() != generatePassword.length()) {
+            partPassChar = choosingChars.get(random.nextInt(choosingChars.size()));
+            guessChar = partPassChar.charAt(random.nextInt(partPassChar.length()));
+            if (generatePassword.length() == 0) {
+                generatePassword += guessChar;
+            }
+            if(generatePassword.length() > 0 && generatePassword.charAt(generatePassword.length()-1) != guessChar) {
+                generatePassword += guessChar;
+            }
+        }
+        return generatePassword;
     }
 }
