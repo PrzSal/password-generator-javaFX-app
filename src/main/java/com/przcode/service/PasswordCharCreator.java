@@ -1,6 +1,6 @@
 package com.przcode.service;
 
-public enum PasswordCreator {
+public enum PasswordCharCreator {
     isLowerCasetrue {
         @Override
         public String addChars() {
