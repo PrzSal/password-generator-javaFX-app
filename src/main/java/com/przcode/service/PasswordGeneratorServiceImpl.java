@@ -32,10 +32,8 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
                 try {
                     methodNameAndUserAnswer = method.getName() + method.invoke(passwordModel).toString();
                     this.choosingCharFromRequirement(methodNameAndUserAnswer);
-                } catch (IllegalAccessException e) {
+                } catch (IllegalAccessException | InvocationTargetException e) {
                     System.out.println(e);
-                } catch (InvocationTargetException f) {
-                    System.out.println(f);
                 }
             }
         }
@@ -49,7 +47,7 @@ public class PasswordGeneratorServiceImpl implements PasswordGeneratorService {
 
     private String generatePassword(PasswordModel passwordModel) {
         Character guessChar;
-        String generatePassword = new String();
+        String generatePassword = "";
         String partPassChar;
         Random random = new Random();
 
