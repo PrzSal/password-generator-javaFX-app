@@ -34,4 +34,14 @@ public class ContentController {
         passwordModel = pGS.addPassword(passwordModel);
         passwordField.setText(passwordModel.getPassword());
     }
+
+    @FXML
+    public void validateLengthPass () {
+
+        lengthPassword.textProperty().addListener((observable, oldValue, newValue) -> {
+            if (!newValue.matches("\\d*")) {
+                lengthPassword.setText(newValue.replaceAll("[^\\d]", ""));
+            }
+        });
+    }
 }
