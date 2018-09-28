@@ -1,22 +1,18 @@
 package com.przcode.model;
 
-import javafx.beans.DefaultProperty;
-
 public class PasswordModel {
 
     private String password;
     private Long passwordLength;
     private Boolean isLowerCase;
     private Boolean isUpperCase;
-    private Boolean isMixLowerAndUpperCase;
     private Boolean isSpecialCharacter;
     private Boolean isDigit;
 
-    public PasswordModel(Long passwordLength, Boolean isLowerCase, Boolean isUpperCase, Boolean isMixLowerAndUpperCase, Boolean isSpecialCharacter, Boolean isDigit) {
+    public PasswordModel(Long passwordLength, Boolean isLowerCase, Boolean isUpperCase, Boolean isSpecialCharacter, Boolean isDigit) {
         this.passwordLength = passwordLength;
         this.isLowerCase = isLowerCase;
         this.isUpperCase = isUpperCase;
-        this.isMixLowerAndUpperCase = isMixLowerAndUpperCase;
         this.isSpecialCharacter = isSpecialCharacter;
         this.isDigit = isDigit;
     }
@@ -44,11 +40,6 @@ public class PasswordModel {
     @ChooseMethodAnnotations(methodName = "choose")
     public Boolean isUpperCase() {
         return isUpperCase;
-    }
-
-    @ChooseMethodAnnotations(methodName = "choose")
-    public Boolean isMixLowerAndUpperCase() {
-        return isMixLowerAndUpperCase;
     }
 
     @ChooseMethodAnnotations(methodName = "choose")
