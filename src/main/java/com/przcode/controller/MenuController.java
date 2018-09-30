@@ -1,7 +1,9 @@
 package com.przcode.controller;
 
 import javafx.fxml.FXML;
+import javafx.print.PrinterJob;
 import javafx.scene.control.MenuBar;
+import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.FileWriter;
@@ -28,6 +30,21 @@ public class MenuController {
                 fileWriter.close();
             } catch (IOException e) {
                 e.printStackTrace();
+            }
+        }
+    }
+
+    @FXML
+    public void configPrint() {
+        TextField fullPasswordField = ContentController.contentController.passwordField;
+        PrinterJob job = PrinterJob.createPrinterJob();
+        if (job != null) {
+            boolean showDialog = job.showPrintDialog(menuBar.getScene().getWindow());
+            if (showDialog) {
+                boolean success = job.printPage(fullPasswordField);
+                if (success) {
+                    job.endJob();
+                }
             }
         }
     }
