@@ -11,13 +11,21 @@
   <name>PasswordGenerator</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
-
+  <packaging>jar</packaging>
+  <properties>
+    <jdk.version>1.8</jdk.version>
+  </properties>
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.akathist.maven.plugins.launch4j</groupId>
+      <artifactId>launch4j-maven-plugin</artifactId>
+      <version>1.7.23</version>
     </dependency>
   </dependencies>
 
@@ -31,6 +39,20 @@
           <configuration>
             <source>1.8</source>
             <target>1.8</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.1.0</version>
+          <configuration>
+            <archive>
+              <!--<manifestFile>${PasswordGenerator.target}/META-INF/MANIFEST.MF</manifestFile>-->
+            <!--</archive>-->
+              <manifest>
+                <mainClass>com.przcode.Main</mainClass>
+              </manifest>
+            </archive>
           </configuration>
         </plugin>
         <plugin>
@@ -49,10 +71,6 @@
         <plugin>
           <artifactId>maven-surefire-plugin</artifactId>
           <version>2.20.1</version>
-        </plugin>
-        <plugin>
-          <artifactId>maven-jar-plugin</artifactId>
-          <version>3.0.2</version>
         </plugin>
         <plugin>
           <artifactId>maven-install-plugin</artifactId>
