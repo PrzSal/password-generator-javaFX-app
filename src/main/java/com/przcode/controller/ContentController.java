@@ -4,10 +4,14 @@ import com.przcode.model.PasswordModel;
 import com.przcode.service.PasswordGeneratorService;
 import com.przcode.service.PasswordGeneratorServiceImpl;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 
-public class ContentController {
+import java.net.URL;
+import java.util.ResourceBundle;
+
+public class ContentController implements Initializable {
 
     @FXML
     private CheckBox isDigit;
@@ -16,11 +20,13 @@ public class ContentController {
     @FXML
     private CheckBox isUpperCase;
     @FXML
-    private TextField passwordField;
+    TextField passwordField;
     @FXML
     private TextField lengthPassword;
     @FXML
     private CheckBox isSpecialChar;
+
+    public static ContentController contentController;
 
     @FXML
     public void createPasswordModel() {
@@ -43,5 +49,10 @@ public class ContentController {
                 lengthPassword.setText(newValue.replaceAll("[^\\d]", ""));
             }
         });
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        contentController = this;
     }
 }
